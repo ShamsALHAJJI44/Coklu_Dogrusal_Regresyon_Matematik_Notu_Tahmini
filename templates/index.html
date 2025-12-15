@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Math Score Prediction</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            background-image: url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1350&q=80");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            backdrop-filter: blur(3px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay {
+            background: rgba(255, 255, 255, 0.82);
+            padding: 35px;
+            width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            animation: fadeIn 0.7s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 0;
+            color: #636e72;
+            font-weight: normal;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            color: #2d3436;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            font-size: 14px;
+            margin-bottom: 12px;
+            transition: 0.2s;
+        }
+
+        input:focus, select:focus {
+            border-color: #4b7bec;
+            box-shadow: 0 0 8px rgba(75, 123, 236, 0.4);
+            outline: none;
+        }
+
+        button {
+            width: 48%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-submit {
+            background: #4b7bec;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: #3867d6;
+        }
+
+        .btn-reset {
+            background: #d63031;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #b71c1c;
+        }
+
+        .result {
+            margin-top: 20px;
+            background: #20bf6b;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <h1>Math Score Predictor</h1>
+    <h3>Enter student information to estimate math score</h3>
+
+    <form action="/predict" method="post">
+
+        <label>Reading Score</label>
+        <input type="number" name="reading" required>
+
+        <label>Writing Score</label>
+        <input type="number" name="writing" required>
+
+        <label>Gender</label>
+        <select name="gender_male">
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+        </select>
+
+        <label>Race/Ethnicity</label>
+        <select name="race">
+            <option value="A">Group A</option>
+            <option value="B">Group B</option>
+            <option value="C">Group C</option>
+            <option value="D">Group D</option>
+            <option value="E">Group E</option>
+        </select>
+
+        <label>Parental Education</label>
+        <select name="parent_edu">
+            <option value="associate">Associate’s Degree</option>
+            <option value="bachelor">Bachelor’s Degree</option>
+            <option value="highschool">High School</option>
+            <option value="master">Master’s Degree</option>
+            <option value="somecollege">Some College</option>
+            <option value="somehs">Some High School</option>
+        </select>
+
+        <label>Lunch Type</label>
+        <select name="lunch">
+            <option value="1">Standard</option>
+            <option value="0">Free / Reduced</option>
+        </select>
+
+        <label>Test Preparation Course</label>
+        <select name="testprep">
+            <option value="1">None</option>
+            <option value="0">Completed</option>
+        </select>
+
+        <div class="btn-row">
+            <button type="submit" class="btn-submit">Predict</button>
+            <button type="reset" class="btn-reset">Reset</button>
+        </div>
+
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">{{ prediction_text }}</div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
