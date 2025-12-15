@@ -1,130 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Math Score Prediction</title>
 
     <style>
         body {
             margin: 0;
-            padding: 0;
-            font-family: "Poppins", sans-serif;
-            background-image: url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1350&q=80");
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            backdrop-filter: blur(3px);
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
-        .overlay {
-            background: rgba(255, 255, 255, 0.82);
-            padding: 35px;
-            width: 500px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            animation: fadeIn 0.7s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .container {
+            width: 420px;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px 32px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
         }
 
         h1 {
             text-align: center;
-            color: #2d3436;
-            margin-bottom: 10px;
-            font-size: 32px;
+            margin: 0;
+            color: #333;
+            font-size: 26px;
         }
 
-        h3 {
+        .subtitle {
             text-align: center;
-            margin-top: 0;
-            color: #636e72;
-            font-weight: normal;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 25px;
         }
 
         label {
-            font-weight: bold;
             display: block;
-            margin-top: 10px;
-            color: #2d3436;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #444;
+            font-size: 14px;
         }
 
         input, select {
             width: 100%;
-            padding: 10px;
-            background: #ffffff;
-            border-radius: 8px;
+            padding: 11px 12px;
+            border-radius: 10px;
             border: 1px solid #ccc;
-            margin-top: 5px;
             font-size: 14px;
-            margin-bottom: 12px;
-            transition: 0.2s;
+            transition: 0.25s;
+            background: #fafafa;
         }
 
         input:focus, select:focus {
-            border-color: #4b7bec;
-            box-shadow: 0 0 8px rgba(75, 123, 236, 0.4);
             outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+            background: #fff;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
         }
 
         button {
-            width: 48%;
+            flex: 1;
             padding: 12px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
             transition: 0.3s;
         }
 
-        .btn-submit {
-            background: #4b7bec;
+        .btn-predict {
+            background: #667eea;
             color: white;
         }
 
-        .btn-submit:hover {
-            background: #3867d6;
+        .btn-predict:hover {
+            background: #556cd6;
         }
 
         .btn-reset {
-            background: #d63031;
+            background: #e74c3c;
             color: white;
         }
 
         .btn-reset:hover {
-            background: #b71c1c;
+            background: #c0392b;
         }
 
         .result {
-            margin-top: 20px;
-            background: #20bf6b;
+            margin-top: 22px;
+            padding: 14px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
             color: white;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 18px;
             text-align: center;
+            font-size: 17px;
             font-weight: bold;
-        }
-
-        .btn-row {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
+            border-radius: 12px;
         }
     </style>
 </head>
 
 <body>
 
-<div class="overlay">
-
-    <h1>Math Score Predictor</h1>
-    <h3>Enter student information to estimate math score</h3>
+<div class="container">
+    <h1>Math Score Prediction</h1>
+    <div class="subtitle">Multiple Linear Regression • Flask App</div>
 
     <form action="/predict" method="post">
 
@@ -140,7 +131,7 @@
             <option value="0">Female</option>
         </select>
 
-        <label>Race/Ethnicity</label>
+        <label>Race / Ethnicity</label>
         <select name="race">
             <option value="A">Group A</option>
             <option value="B">Group B</option>
@@ -171,17 +162,15 @@
             <option value="0">Completed</option>
         </select>
 
-        <div class="btn-row">
-            <button type="submit" class="btn-submit">Predict</button>
+        <div class="buttons">
+            <button type="submit" class="btn-predict">Predict</button>
             <button type="reset" class="btn-reset">Reset</button>
         </div>
-
     </form>
 
     {% if prediction_text %}
-    <div class="result">{{ prediction_text }}</div>
+        <div class="result">{{ prediction_text }}</div>
     {% endif %}
-
 </div>
 
 </body>
